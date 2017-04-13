@@ -29,7 +29,10 @@ All the code in this repository is under the Creative Commons License. You can u
 I do that on my free time, I'll try to make all those planned features as soon as possible.
 
  -- Lead Developer : Dogeek
+ 
  -- Debugger Idea : Krayz
+ 
  -- Layout Design : Dogeek
+
 
 This started as a need, so that's why the current build is not very polished. All you need to run this script is Python 3.6, as everything has been coded with standard libraries (tkinter ; os ; sys ; time). You can also download a prebuilt version straight off of github. This software is completely portable as well, you can put it on a USB stick as its "compiled" version and it'll work just fine.
