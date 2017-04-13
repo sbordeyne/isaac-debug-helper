@@ -24,7 +24,7 @@ class OptionGUI(tk.TopLevel): #TODO : make an option window to pick colors for e
 		pass
 	pass
 
-class GUI(tk.Frame):
+class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget to not clutter the text widget, add scroll bar, try to auto reload if the lua file is deleted & add a about/options menu
 	def __init__(self, master=None):
 		super(GUI, self).__init__()
 		self.master = master
