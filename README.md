@@ -12,7 +12,7 @@ All the code in this repository is under the Creative Commons License. You can u
  - The log file is automatically found, no need for any configuration, it works out of the box
  - Fully designed to be cross-platform (at least as long as Python support it)
  - Dynamic LUA memory usage while the debugger is running, with a progress bar to make the logs even more readable
- - Add a scrollbar to the text widget
+ - Scrollbar for the text widget
 
 # Planned Features :
 
