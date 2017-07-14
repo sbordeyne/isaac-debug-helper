@@ -11,16 +11,16 @@ All the code in this repository is under the Creative Commons License. You can u
  - A GUI designed for ease of use, with most of the window dedicated to the output
  - The log file is automatically found, no need for any configuration, it works out of the box
  - Fully designed to be cross-platform (at least as long as Python support it)
- 
+ - Dynamic LUA memory usage while the debugger is running, with a progress bar to make the logs even more readable
+ - Add a scrollbar to the text widget
+
 # Planned Features :
 
  - A pixel art tool specifically for isaac, with integrated palettes, image format, and file saving straight into your mod's' folder
  - Option Toolbox to set up custom tags and filters for the debugger, changing colors etc
- - Dynamic LUA memory usage while the debugger is running, with a progress bar to make the logs even more readable
  - Additional infos that usually clutter the text available in another tab, with disablable labels and widgets to display the currenly played music for instance
  - About menu
  - Options Menu (to trigger the option toolbox)
- - Add a scrollbar to the text widget
  - Auto reload feature if isaac is restarted
  - Enhanced bug reporter that'll create automatic issues on github for specific mods
 
@@ -29,9 +29,9 @@ All the code in this repository is under the Creative Commons License. You can u
 I do that on my free time, I'll try to make all those planned features as soon as possible.
 
  -- Lead Developer : Dogeek
- 
+
  -- Debugger Idea : Krayz
- 
+
  -- Layout Design : Dogeek
 
 
