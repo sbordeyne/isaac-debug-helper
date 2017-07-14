@@ -7,6 +7,7 @@ from tkinter import colorchooser
 import sys
 import time
 from os.path import expanduser
+import psutil
 
 def get_log_path():
 	p = ""
@@ -18,6 +19,15 @@ def get_log_path():
 		p = expanduser("~/Documents/My Games/binding of isaac afterbirth+/log.txt")
 	return p
 
+def is_isaac_running():
+	for p in psutil.process_iter():
+		try:
+			if 'isaac-ng' in p.name():
+				return True
+		except psutil.Error:
+			pass
+	return False
+
 TAGS = {
 			"error":"#FF0000",
 			"warning":"#00FF00",
@@ -27,12 +37,19 @@ TAGS = {
 
 OPTIONSOPEN = False
 MAX_LUA_MEMORY = 1024*1024*3 #bytes (3MB)
+AUTO_RELOAD = True
 
 class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for error highlighting, add new filters
 	def __init__(self, master = None):
 		super(OptionGUI, self).__init__()
+		global AUTO_RELOAD
 		self.master = master
 		self.tags = TAGS
+		self.checkbutton_var = tk.IntVar()
+		if AUTO_RELOAD:
+			self.checkbutton_var.set(1)
+		else:
+			self.checkbutton_var.set(0)
 		self.labels = []
 		self.buttons = []
 		self.config()
@@ -47,10 +64,14 @@ class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for e
 			self.labels[i].grid(column=0, row=i)
 			self.buttons[i].grid(column=1, row=i)
 			self.buttons[i].config(command=lambda x=i:self.open_color_picker(x))
+		self.checkbutton = tk.Checkbutton(self, variable=self.checkbutton_var, text="Auto-reload")
+		self.checkbutton.grid(row=4, column=0, columnspan=2)
 		self.ok_button = tk.Button(self, text="Ok", command=self.onOkButton)
 		self.cancel_button = tk.Button(self, text="Cancel", command=self.onCancelButton)
-		self.ok_button.grid(column=0, row=4)
-		self.cancel_button.grid(column=1, row=4)
+		self.ok_button.grid(column=0, row=5)
+		self.cancel_button.grid(column=1, row=5)
+		self.loopCheckButton()
+
 	def open_color_picker(self, i):
 		color = colorchooser.askcolor()
 		if color[1] is not None:
@@ -69,13 +90,21 @@ class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for e
 		global OPTIONSOPEN
 		OPTIONSOPEN = False
 		self.destroy()
+
+	def loopCheckButton(self):
+		global AUTO_RELOAD
+		if self.checkbutton_var.get():
+			AUTO_RELOAD = True
+		else:
+			AUTO_RELOAD = False
+		self.after(20, self.loopCheckButton)
 	pass
 
 class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget to not clutter the text widget, add scroll bar, try to auto reload if the lua file is deleted & add a about/options menu
 	def __init__(self, master=None):
 		super(GUI, self).__init__()
 		self.master = master
-		self.start_stop = False
+		self.started = False
 		self.log_path = get_log_path()
 		self.oldline = "  "
 		self.tags = TAGS
@@ -112,7 +141,7 @@ class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget
 		pass
 
 	def readfile(self):
-		if self.start_stop:
+		if self.started:
 			self.tags = TAGS
 			self.tag_config()
 			tmp = self.log_f.readline().lower()
@@ -141,17 +170,24 @@ class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget
 			self.output.see(tk.END)
 			self.update_idletasks()
 			self.after(5, self.readfile)
-			pass
 		pass
 	def start(self):
 		self.log_f = open(self.log_path, "r")
-		self.start_stop = True
+		self.started = True
 		self.readfile()
 		pass
 	def stop(self):
 		self.log_f.close()
-		self.start_stop = False
+		self.started = False
 		pass
+
+	def auto_reload(self):
+		global AUTO_RELOAD
+		if AUTO_RELOAD:
+			if is_isaac_running() and not self.started:
+				self.start()
+			elif not is_isaac_running() and self.started:
+				self.stop()
 	def open_options(self):
 		global OPTIONSOPEN
 		if not OPTIONSOPEN:

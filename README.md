@@ -4,6 +4,13 @@ This tool is aimed at anyone who wishes to mod The Binding of Isaac. It reads th
 
 All the code in this repository is under the Creative Commons License. You can use and modify it however you want, as long as you give credit where credit is due.
 
+# Requirements :
+
+ - Python 3.x (tested on 3.6.1)
+ - psutil (pip install psutil) - https://github.com/giampaolo/psutil
+
+ All other libraries are standard libraries.
+
 # Features :
 
  - Start and Stop menu buttons, to load or reload the script when debugging
@@ -13,16 +20,16 @@ All the code in this repository is under the Creative Commons License. You can u
  - Fully designed to be cross-platform (at least as long as Python support it)
  - Dynamic LUA memory usage while the debugger is running, with a progress bar to make the logs even more readable
  - Scrollbar for the text widget
+ - Option Toolbox to set up custom tags and filters for the debugger, changing colors etc
+ - Auto reload feature if isaac is restarted
 
 # Planned Features :
 
  - A pixel art tool specifically for isaac, with integrated palettes, image format, and file saving straight into your mod's' folder
- - Option Toolbox to set up custom tags and filters for the debugger, changing colors etc
  - Additional infos that usually clutter the text available in another tab, with disablable labels and widgets to display the currenly played music for instance
  - About menu
- - Options Menu (to trigger the option toolbox)
- - Auto reload feature if isaac is restarted
  - Enhanced bug reporter that'll create automatic issues on github for specific mods
+ - Store preferences in a local config file
 
 # About the project :
 
@@ -35,4 +42,4 @@ I do that on my free time, I'll try to make all those planned features as soon a
  -- Layout Design : Dogeek
 
 
-This started as a need, so that's why the current build is not very polished. All you need to run this script is Python 3.6, as everything has been coded with standard libraries (tkinter ; os ; sys ; time). You can also download a prebuilt version straight off of github. This software is completely portable as well, you can put it on a USB stick as its "compiled" version and it'll work just fine.
+This started as a need, so that's why the current build is not very polished. You can also download a prebuilt version straight off of github. This software is completely portable as well, you can put it on a USB stick as its "compiled" version and it'll work just fine.
