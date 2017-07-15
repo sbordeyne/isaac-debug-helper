@@ -22,6 +22,8 @@ All the code in this repository is under the Creative Commons License. You can u
  - Scrollbar for the text widget
  - Option Toolbox to set up custom tags and filters for the debugger, changing colors etc
  - Auto reload feature if isaac is restarted
+ - Store preferences in a local config file
+ - Slider for maximum LUA memory (from 1KB to 10KB) in the options
 
 # Planned Features :
 
@@ -29,7 +31,6 @@ All the code in this repository is under the Creative Commons License. You can u
  - Additional infos that usually clutter the text available in another tab, with disablable labels and widgets to display the currenly played music for instance
  - About menu
  - Enhanced bug reporter that'll create automatic issues on github for specific mods
- - Store preferences in a local config file
 
 # About the project :
 

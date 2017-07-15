@@ -7,6 +7,8 @@ from tkinter import colorchooser
 import sys
 import time
 from os.path import expanduser
+import configparser
+#External libraries
 import psutil
 
 def get_log_path():
@@ -28,23 +30,33 @@ def is_isaac_running():
 			pass
 	return False
 
+OPTIONSOPEN = False
+config = configparser.ConfigParser()
+config.read("config.cfg")
+TAGS = config["TAGS"]
+MAX_LUA_MEMORY = config["GENERAL"].getint("maxmem")
+AUTO_RELOAD = config["GENERAL"].getboolean("autoreload")
+GEOMETRY = config["GEOMETRY"]["x"] + "x" + config["GEOMETRY"]["y"]
+"""
 TAGS = {
 			"error":"#FF0000",
 			"warning":"#00FF00",
 			"info":"#0000FF",
 			"luadebug":"#000000"
 }
-
-OPTIONSOPEN = False
 MAX_LUA_MEMORY = 1024*1024*3 #bytes (3MB)
 AUTO_RELOAD = True
+"""
 
 class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for error highlighting, add new filters
 	def __init__(self, master = None):
 		super(OptionGUI, self).__init__()
 		global AUTO_RELOAD
+		global MAX_LUA_MEMORY
 		self.master = master
 		self.tags = TAGS
+		self.maxmem_var = tk.IntVar()
+		self.maxmem_var.set(MAX_LUA_MEMORY)
 		self.checkbutton_var = tk.IntVar()
 		if AUTO_RELOAD:
 			self.checkbutton_var.set(1)
@@ -66,11 +78,15 @@ class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for e
 			self.buttons[i].config(command=lambda x=i:self.open_color_picker(x))
 		self.checkbutton = tk.Checkbutton(self, variable=self.checkbutton_var, text="Auto-reload")
 		self.checkbutton.grid(row=4, column=0, columnspan=2)
+		tk.Label(self, text="Maximum LUA Memory (KB): ").grid(row=5, column=0)
+		self.maxmem_scale = tk.Scale(self, variable=self.maxmem_var, orient="horizontal", from_=1, to=10*1024, command=self.scaleToGlobal)
+		self.maxmem_scale.grid(row=5, column=1)
+
 		self.ok_button = tk.Button(self, text="Ok", command=self.onOkButton)
 		self.cancel_button = tk.Button(self, text="Cancel", command=self.onCancelButton)
-		self.ok_button.grid(column=0, row=5)
-		self.cancel_button.grid(column=1, row=5)
-		self.loopCheckButton()
+		self.ok_button.grid(column=0, row=6)
+		self.cancel_button.grid(column=1, row=6)
+		self.loopCheck()
 
 	def open_color_picker(self, i):
 		color = colorchooser.askcolor()
@@ -90,25 +106,28 @@ class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for e
 		global OPTIONSOPEN
 		OPTIONSOPEN = False
 		self.destroy()
-
-	def loopCheckButton(self):
+	def scaleToGlobal(self, arg):
+		global MAX_LUA_MEMORY
+		MAX_LUA_MEMORY = self.maxmem_var.get()
+	def loopCheck(self):
 		global AUTO_RELOAD
 		if self.checkbutton_var.get():
 			AUTO_RELOAD = True
 		else:
 			AUTO_RELOAD = False
-		self.after(20, self.loopCheckButton)
+		self.after(20, self.loopCheck)
 	pass
 
 class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget to not clutter the text widget, add scroll bar, try to auto reload if the lua file is deleted & add a about/options menu
 	def __init__(self, master=None):
 		super(GUI, self).__init__()
 		self.master = master
+		self.master.protocol("WM_DELETE_WINDOW", self.on_closing)
 		self.started = False
 		self.log_path = get_log_path()
 		self.oldline = "  "
 		self.tags = TAGS
-		self.max_mem = MAX_LUA_MEMORY
+		self.max_mem = MAX_LUA_MEMORY*1024
 		self.init_layout()
 		pass
 
@@ -194,12 +213,24 @@ class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget
 			OPTIONSOPEN = True
 			options = OptionGUI(master=self.master)
 			options.mainloop()
+	def on_closing(self):
+		config = configparser.ConfigParser()
+		config["TAGS"] = TAGS
+		config["GENERAL"] = {}
+		config["GENERAL"]["maxmem"] = str(MAX_LUA_MEMORY)
+		config["GENERAL"]["autoreload"] = str(AUTO_RELOAD)
+		config["GEOMETRY"] = {}
+		config["GEOMETRY"]["x"] = GEOMETRY.split("x")[0]
+		config["GEOMETRY"]["y"] = GEOMETRY.split("x")[1]
+		with open('config.cfg', 'w') as configfile:
+			config.write(configfile)
+		self.master.destroy()
 	pass
 
 if __name__ == "__main__":
 	root = tk.Tk()
 	root.title("Isaac Debug Helper")
-	root.geometry("650x500")
+	root.geometry(GEOMETRY)
 	gui = GUI(root)
 	gui.pack()
 	gui.mainloop()
