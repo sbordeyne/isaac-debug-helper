@@ -41,8 +41,8 @@ class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget
 		config["GENERAL"]["maxmem"] = str(MAX_LUA_MEMORY)
 		config["GENERAL"]["autoreload"] = str(AUTO_RELOAD)
 		config["GEOMETRY"] = {}
-		config["GEOMETRY"]["x"] = GEOMETRY.split("x")[0]
-		config["GEOMETRY"]["y"] = GEOMETRY.split("x")[1]
+		config["GEOMETRY"]["x"] = str(self.winfo_height())
+		config["GEOMETRY"]["y"] = str(self.winfo_width())
 		with open('config.cfg', 'w') as configfile:
 			config.write(configfile)
 		self.master.destroy()
