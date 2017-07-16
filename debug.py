@@ -4,6 +4,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import colorchooser
+import tkinter.messagebox as messagebox
 import sys
 import time
 from os.path import expanduser
@@ -120,9 +121,59 @@ class OptionGUI(tk.Toplevel): #TODO : make an option window to pick colors for e
 
 class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget to not clutter the text widget, add scroll bar, try to auto reload if the lua file is deleted & add a about/options menu
 	def __init__(self, master=None):
-		super(GUI, self).__init__()
+		tk.Frame.__init__(self,master)
 		self.master = master
 		self.master.protocol("WM_DELETE_WINDOW", self.on_closing)
+		self.init_layout()
+		pass
+
+	def init_layout(self):
+		self.tabBar = ttk.Notebook(self)
+		self.tabBar.pack(fill=tk.BOTH, padx=2, pady=3)
+		self.tab_debugger = DebugGUI(self.tabBar)
+		self.tabBar.add(self.tab_debugger, text="Debugger")
+
+		self.menubar = tk.Menu(self)
+		self.menubar.add_command(label="Start", command=self.tab_debugger.start)
+		self.menubar.add_command(label="Stop", command=self.tab_debugger.stop)
+		self.menubar.add_command(label="Options", command=self.open_options)
+		self.menubar.add_command(label="About", command=self.about)
+		self.master.config(menu=self.menubar)
+		pass
+	def on_closing(self):
+		config = configparser.ConfigParser()
+		config["TAGS"] = TAGS
+		config["GENERAL"] = {}
+		config["GENERAL"]["maxmem"] = str(MAX_LUA_MEMORY)
+		config["GENERAL"]["autoreload"] = str(AUTO_RELOAD)
+		config["GEOMETRY"] = {}
+		config["GEOMETRY"]["x"] = GEOMETRY.split("x")[0]
+		config["GEOMETRY"]["y"] = GEOMETRY.split("x")[1]
+		with open('config.cfg', 'w') as configfile:
+			config.write(configfile)
+		self.master.destroy()
+	def about(self):
+		message = """
+		Isaac Debug Helper by Dogeek\n
+		For additional information, check out\n
+		http://github.com/dogeek/isaac-debug-helper\n
+		License : Creative Commons
+		"""
+		messagebox.showinfo("About", message)
+		pass
+
+	def open_options(self):
+		global OPTIONSOPEN
+		if not OPTIONSOPEN:
+			OPTIONSOPEN = True
+			options = OptionGUI(master=self.master)
+			options.mainloop()
+	pass
+
+class DebugGUI(tk.Frame):
+	def __init__(self, master=None):
+		tk.Frame.__init__(self,master)
+		self.master = master
 		self.started = False
 		self.log_path = get_log_path()
 		self.oldline = "  "
@@ -132,12 +183,6 @@ class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget
 		pass
 
 	def init_layout(self):
-		self.menubar = tk.Menu(self)
-		self.menubar.add_command(label="Start", command=self.start)
-		self.menubar.add_command(label="Stop", command=self.stop)
-		self.menubar.add_command(label="Options", command=self.open_options)
-		self.master.config(menu=self.menubar)
-
 		self.scrollbar = tk.Scrollbar(self)
 		self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
@@ -207,24 +252,6 @@ class GUI(tk.Frame): #TODO: lua mem usage filter to display in a separate widget
 				self.start()
 			elif not is_isaac_running() and self.started:
 				self.stop()
-	def open_options(self):
-		global OPTIONSOPEN
-		if not OPTIONSOPEN:
-			OPTIONSOPEN = True
-			options = OptionGUI(master=self.master)
-			options.mainloop()
-	def on_closing(self):
-		config = configparser.ConfigParser()
-		config["TAGS"] = TAGS
-		config["GENERAL"] = {}
-		config["GENERAL"]["maxmem"] = str(MAX_LUA_MEMORY)
-		config["GENERAL"]["autoreload"] = str(AUTO_RELOAD)
-		config["GEOMETRY"] = {}
-		config["GEOMETRY"]["x"] = GEOMETRY.split("x")[0]
-		config["GEOMETRY"]["y"] = GEOMETRY.split("x")[1]
-		with open('config.cfg', 'w') as configfile:
-			config.write(configfile)
-		self.master.destroy()
 	pass
 
 if __name__ == "__main__":
