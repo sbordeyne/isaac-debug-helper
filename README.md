@@ -24,12 +24,12 @@ All the code in this repository is under the Creative Commons License. You can u
  - Auto reload feature if isaac is restarted
  - Store preferences in a local config file
  - Slider for maximum LUA memory (from 1KB to 10KB) in the options
+ - About menu
 
 # Planned Features :
 
  - A pixel art tool specifically for isaac, with integrated palettes, image format, and file saving straight into your mod's' folder
  - Additional infos that usually clutter the text available in another tab, with disablable labels and widgets to display the currenly played music for instance
- - About menu
  - Enhanced bug reporter that'll create automatic issues on github for specific mods
 
 # About the project :
