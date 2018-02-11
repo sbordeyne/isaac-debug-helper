@@ -1,4 +1,4 @@
-#Isaac Modding Helper Tool - Fork
+# Isaac debug helper - Fork
 Fork of https://github.com/Dogeek/isaac-debug-helper
 
 # Requirements :
