@@ -3,7 +3,9 @@ Fork of https://github.com/Dogeek/isaac-debug-helper
 
 # Requirements :
  - Python 3.x (tested on 3.6.4 on windows)
+ 
 OPTIONAL
+
  - psutil (pip install psutil) - https://github.com/giampaolo/psutil
  
 # Known issues 
