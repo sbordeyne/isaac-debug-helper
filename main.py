@@ -50,12 +50,13 @@ class GUI(tk.Frame):
 		self.master.destroy()
 	def about(self):
 		message = """
-		Isaac Debug Helper version 2.0\n
-		By Dogeek\n
-		Modded by Team Dodo\n
+		Isaac Debug Helper version 2.0.0\n
+		Fork by Team Dodo (forked software by Dogeek)\n
 		For additional information, check out\n
+		https://github.com/teamdodo/isaac-debug-helper\n
+		Forked from:
 		http://github.com/dogeek/isaac-debug-helper\n
-		License : Creative Commons
+		License : Creative Commons Attribution
 		"""
 		messagebox.showinfo("About", message)
 		pass
