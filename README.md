@@ -1,47 +1,46 @@
-# Isaac debug helper - Fork
-Fork of https://github.com/Dogeek/isaac-debug-helper
+# Isaac Debug Helper
 
-# Requirements :
- - Python 3.x (tested on 3.6.4 on windows)
+This tool is a fork of [Isaac Modding Helper Tool] by Dogeek, and is aimed at anyone who wishes to create mods for *The Binding of Isaac*. It's a log reader: reads the log files directly and displays the content in a user-friendly graphical user interface. 
+The goal of Dogeek's project is to create a complete software suite for modding of *The Binding of Isaac*.
+
+[License]: Creative Commons Attribution (CC-BY). You can use and modify it however you want, as long as you give credit.
+
+## Requirements :
+
+ - Python 3.x (tested on 3.6.4 on Windows)
  
-OPTIONAL
+### Optional
 
- - psutil (pip install psutil) - https://github.com/giampaolo/psutil
- 
-# Known issues 
-* Options window is named "Isaac debug helper" instead of "Options" in spite of attempts of giving it the correct name.
-* Lua memory usage counter does NOT have transparent background, then covers part of the progress bar. It's a Tkinter issue: labels can't have transparent background.
-* When opening color picker, options window goes on the background of main window
+ - [psutil] (pip install psutil) - Needed for autoreload feature.
 
-# Changelog (differences from original Isaac debug helper)
-# GUI
-+ Added debugger status indicator
-+ Added Lua memory usage counter on the progress bar.
-+ Added Clear text function
-+ Reset do defaults option and adjusted buttons size
+ All other libraries are standard libraries.
 
-# DEBUG
-* Fixed "SyntaxError: encoding problem: utf8" when launching by shell or double-click
+# Features :
 
-Changed encoding name to utf-8 in .py files.
+ - *Start* and *Stop* menu buttons, to load or reload the script when debugging
+ - Color highlighting errors, warnings, informations and debug information
+ - A GUI designed for ease of use, with most of the window dedicated to the output
+ - The log file is automatically found, no need for any configuration, it works out of the box
+ - Fully designed to be cross-platform (at least as long as Python support it)
+ - Dynamic LUA memory usage while the debugger is running, with a progress bar to make the logs even more readable
+ - Scrollbar for the text widget
+ - Option Toolbox to set up custom tags and filters for the debugger, changing colors etc
+ - Auto reload feature if *The Binding of Isaac* is restarted
+ - Store preferences in a local config file
+ - Slider for maximum LUA memory (from 1KB to 10KB) in the options
+ - About menu
 
-* Fixed options not saving, fixed options not opening again if closed
+# Changelog
+See [CHANGELOG.md]
+# About the project :
 
-It looked like a problem with global variable: solved merging options.py and main.py. Brutal solution but it works.
+A modification by [Team Dodo] of [Isaac Modding Helper Tool]. Original project's credits:
+ - Lead Developer: Dogeek
+ - Debugger Idea: Krayz
+ - Layout Design: Dogeek
 
-
-# CHANGES AND IMPROVEMENTS
-* Options
-
-Added function called on WM_DELETE_WINDOW of Options window.
-
-Options are now saved in config.cfg both when onOkButton and on_closing are triggered.
-
-Options not saved when option window is open and user changes option then closes parent window. In this case user is supposed to discard changes.
-
-* Removed old #TODO
-* Added version in About
-* Handle config.cfg not found or damaged (TODO: improve code of this feature)
-* Handle psutil not found
-* Handle case of click on "Stop" when debugger has never been started. Otherwise raises exception "DebugFrame has no object log_f".
-* Add Team Dodo credits
+[CHANGELOG.md]: /CHANGELOG.md
+[Isaac Modding Helper Tool]: https://github.com/Dogeek/isaac-debug-helper
+[License]: https://github.com/Dogeek/isaac-debug-helper/issues/2
+[psutil]: https://github.com/giampaolo/psutil
+[Team Dodo]: https://github.com/teamdodo/
