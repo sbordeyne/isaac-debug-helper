@@ -1,46 +1,47 @@
-# Isaac Modding Helper Tool
-
-This tool is aimed at anyone who wishes to mod The Binding of Isaac. It reads the log files directly and displays the content in a user-friendly graphical user interface. Currently, there are not many features, but more is planned, to make this a complete software suite for modding Isaac.
-
-All the code in this repository is under the Creative Commons License. You can use and modify it however you want, as long as you give credit where credit is due.
+# Isaac debug helper - Fork
+Fork of https://github.com/Dogeek/isaac-debug-helper
 
 # Requirements :
+ - Python 3.x (tested on 3.6.4 on windows)
+ 
+OPTIONAL
 
- - Python 3.x (tested on 3.6.1)
  - psutil (pip install psutil) - https://github.com/giampaolo/psutil
+ 
+# Known issues 
+* Options window is named "Isaac debug helper" instead of "Options" in spite of attempts of giving it the correct name.
+* Lua memory usage counter does NOT have transparent background, then covers part of the progress bar. It's a Tkinter issue: labels can't have transparent background.
+* When opening color picker, options window goes on the background of main window
 
- All other libraries are standard libraries.
+# Changelog (differences from original Isaac debug helper)
+# GUI
++ Added debugger status indicator
++ Added Lua memory usage counter on the progress bar.
++ Added Clear text function
++ Reset do defaults option and adjusted buttons size
 
-# Features :
+# DEBUG
+* Fixed "SyntaxError: encoding problem: utf8" when launching by shell or double-click
 
- - Start and Stop menu buttons, to load or reload the script when debugging
- - Color highlighting errors, warnings, informations and debug information
- - A GUI designed for ease of use, with most of the window dedicated to the output
- - The log file is automatically found, no need for any configuration, it works out of the box
- - Fully designed to be cross-platform (at least as long as Python support it)
- - Dynamic LUA memory usage while the debugger is running, with a progress bar to make the logs even more readable
- - Scrollbar for the text widget
- - Option Toolbox to set up custom tags and filters for the debugger, changing colors etc
- - Auto reload feature if isaac is restarted
- - Store preferences in a local config file
- - Slider for maximum LUA memory (from 1KB to 10KB) in the options
- - About menu
+Changed encoding name to utf-8 in .py files.
 
-# Planned Features :
+* Fixed options not saving, fixed options not opening again if closed
 
- - A pixel art tool specifically for isaac, with integrated palettes, image format, and file saving straight into your mod's' folder
- - Additional infos that usually clutter the text available in another tab, with disablable labels and widgets to display the currenly played music for instance
- - Enhanced bug reporter that'll create automatic issues on github for specific mods
-
-# About the project :
-
-I do that on my free time, I'll try to make all those planned features as soon as possible.
-
- -- Lead Developer : Dogeek
-
- -- Debugger Idea : Krayz
-
- -- Layout Design : Dogeek
+It looked like a problem with global variable: solved merging options.py and main.py. Brutal solution but it works.
 
 
-This started as a need, so that's why the current build is not very polished. You can also download a prebuilt version straight off of github. This software is completely portable as well, you can put it on a USB stick as its "compiled" version and it'll work just fine.
+# CHANGES AND IMPROVEMENTS
+* Options
+
+Added function called on WM_DELETE_WINDOW of Options window.
+
+Options are now saved in config.cfg both when onOkButton and on_closing are triggered.
+
+Options not saved when option window is open and user changes option then closes parent window. In this case user is supposed to discard changes.
+
+* Removed old #TODO
+* Added version in About
+* Handle config.cfg not found or damaged (TODO: improve code of this feature)
+* Handle psutil not found
+* Handle case of click on "Stop" when debugger has never been started. Otherwise raises exception "DebugFrame has no object log_f".
+* Add Team Dodo credits
