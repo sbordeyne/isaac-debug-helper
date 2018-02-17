@@ -44,6 +44,6 @@ A modification by [Team Dodo] of [Isaac Modding Helper Tool]. Original project's
 
 [CHANGELOG.md]: /CHANGELOG.md
 [Isaac Modding Helper Tool]: https://github.com/Dogeek/isaac-debug-helper
-[License]: /LICENSE ; https://github.com/Dogeek/isaac-debug-helper/issues/2
+[License]: https://github.com/Dogeek/isaac-debug-helper/issues/2
 [psutil]: https://github.com/giampaolo/psutil
 [Team Dodo]: https://github.com/teamdodo/
