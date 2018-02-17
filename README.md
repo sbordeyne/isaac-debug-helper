@@ -3,7 +3,7 @@
 This tool is a fork of [Isaac Modding Helper Tool] by Dogeek, and is aimed at anyone who wishes to create mods for *The Binding of Isaac*. It's a log reader: reads the log files directly and displays the content in a user-friendly graphical user interface. 
 The goal of Dogeek's project is to create a complete software suite for modding of *The Binding of Isaac*.
 
-[License]: GNU GPL 3.0
+License: GNU GPL 3.0
 
 ## Requirements :
 
@@ -41,6 +41,5 @@ A modification by [Team Dodo] of [Isaac Modding Helper Tool]. Original project's
 
 [CHANGELOG.md]: /CHANGELOG.md
 [Isaac Modding Helper Tool]: https://github.com/Dogeek/isaac-debug-helper
-[License]: https://github.com/Dogeek/isaac-debug-helper/issues/2
 [psutil]: https://github.com/giampaolo/psutil
 [Team Dodo]: https://github.com/teamdodo/
