@@ -5,6 +5,12 @@ The goal of Dogeek's project is to create a complete software suite for modding 
 
 License: GNU GPL 3.0
 
+## Screenshot
+![Isaac Debug Helper 2.1.0 on Windows][pic]
+
+[pic]: https://github.com/teamdodo/isaac-debug-helper/blob/master/pics/Isaac_Debug_Helper_2.1.0_720x480.jpg "Isaac Debug Helper 2.1.0 on Windows"
+
+
 ## Requirements :
 
  - Python 3.x (tested on 3.6.4 on Windows)
