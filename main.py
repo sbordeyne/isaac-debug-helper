@@ -11,7 +11,7 @@ from tkinter import colorchooser
 from constants import *
 from functions import *
 from debug import DebugFrame
-
+from update import *
 
 class GUI(tk.Frame):
 	def __init__(self, master=None):
