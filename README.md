@@ -13,13 +13,22 @@ License: GNU GPL 3.0
 
 ## Requirements :
 
- - Python 3.x (tested on 3.6.4 on Windows)
+### Executables
+Executables should work out of the box. If they don't, tell us.
+
+### Python script
+ - Python 3.x 
+ - On Linux you might have to install manually tcl/tk (tkinter) for Python if it's not already installed.
  
-### Optional
+#### Optional
 
  - [psutil] (pip install psutil) - Needed for autoreload feature.
 
  All other libraries are standard libraries.
+
+## Tested on:
+* Python 3.6.4 on Windows 7
+* Python 3.5.1-3 with python3-tk 3.5.1-1 on Lubuntu 16.04 LTS
 
 # Features :
 
