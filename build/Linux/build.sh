@@ -1,0 +1,3 @@
+echo Build started...
+python3 setupLinux.py build > build.log
+echo Build finished. Check build.log.
