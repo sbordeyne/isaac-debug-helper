@@ -53,7 +53,7 @@ class DebugFrame(tk.Frame):
 			tmp = self.log_f.readline().lower()
 			if self.oldline != tmp: #display spam only once@FileLoad
 				self.output.config(state=tk.NORMAL)
-				if "err" in tmp or "error" in tmp or "exception" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Error filter to display
+				if "err" in tmp or "exception" in tmp and not "overlayeffect" in tmp and not "animation" in tmp: #Error filter to display
 					self.output.insert(tk.END, tmp, "error")
 				elif "lua mem usage" in tmp:
 					mem_txt = tmp.split("lua mem usage: ")[1]

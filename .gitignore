@@ -1,1 +1,3 @@
-update/
+dist/
+__pycache__/
+config.cfg
