@@ -11,7 +11,7 @@ from tkinter import colorchooser
 from constants import *
 from functions import *
 from debug import DebugFrame
-
+from update import *
 
 class GUI(tk.Frame):
 	def __init__(self, master=None):
@@ -32,6 +32,7 @@ class GUI(tk.Frame):
 		self.menubar.add_command(label="Stop", command=self.tab_debugger.stop)
 		self.menubar.add_command(label="Clear", command=self.tab_debugger.clear)
 		self.menubar.add_command(label="Options", command=self.open_options)
+		self.menubar.add_command(label="Check for updates", command=updateCheckClass.update)
 		self.menubar.add_command(label="About", command=self.about)
 		self.master.config(menu=self.menubar)
 		pass
@@ -50,13 +51,13 @@ class GUI(tk.Frame):
 		self.master.destroy()
 	def about(self):
 		message = """
-		Isaac Debug Helper version 2.0.0\n
-		Fork by Team Dodo (forked software by Dogeek)\n
+		Isaac Debug Helper\n
+		Version 2.1.0\n
+		Fork by Team Dodo (based on software by Dogeek)\n
 		For additional information, check out\n
-		https://github.com/teamdodo/isaac-debug-helper\n
-		Forked from:
 		http://github.com/dogeek/isaac-debug-helper\n
-		License : Creative Commons Attribution
+		http://github.com/teamdodo/isaac-debug-helper\n
+		License : GNU GPL 3.0
 		"""
 		messagebox.showinfo("About", message)
 		pass

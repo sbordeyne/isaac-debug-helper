@@ -3,20 +3,33 @@
 This tool is aimed at anyone who wishes to create mods for *The Binding of Isaac*. It's a log reader: reads the log files directly and displays the content in a user-friendly graphical user interface. 
 The goal of this project is to create a complete software suite for modding *The Binding of Isaac*.
 
-[License]: GPL3.0.
 
-* You can distribute it, sell it, modify it, and contributors have a patent right over it.
-* You must use the same license for any derivative of this software, and distribute this license with it. You also must give credit, and a link to this repository if this software is used in another project of yours (even for commercial use).
+License: GNU GPL 3.0
+
+## Screenshot
+![Isaac Debug Helper 2.1.0 on Windows][pic]
+
+[pic]: https://github.com/teamdodo/isaac-debug-helper/blob/master/pics/Isaac_Debug_Helper_2.1.0_720x480.jpg "Isaac Debug Helper 2.1.0 on Windows"
+
 
 ## Requirements :
 
- - Python 3.x (tested on 3.6.4 on Windows and 3.7.0a2 on ubuntu 17.10) with a working tk/Tcl installation.
+### Executables
+Executables should work out of the box. If they don't, tell us.
+
+### Python script
+ - Python 3.x 
+ - On Linux you might have to install manually tcl/tk (tkinter) for Python if it's not already installed.
  
-### Optional
+#### Optional
 
  - [psutil] (pip install psutil) - Needed for autoreload feature.
 
  All other libraries are standard libraries.
+
+## Tested on:
+* Python 3.6.4 on Windows 7
+* Python 3.5.1-3 with python3-tk 3.5.1-1 on Lubuntu 16.04 LTS
 
 # Features :
 
@@ -44,6 +57,5 @@ A modification by [Team Dodo] of [Isaac Modding Helper Tool]. Original project's
 
 [CHANGELOG.md]: /CHANGELOG.md
 [Isaac Modding Helper Tool]: https://github.com/Dogeek/isaac-debug-helper
-[License]: https://github.com/Dogeek/isaac-debug-helper/issues/2
 [psutil]: https://github.com/giampaolo/psutil
 [Team Dodo]: https://github.com/teamdodo/

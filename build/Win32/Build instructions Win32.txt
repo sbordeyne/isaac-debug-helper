@@ -1,0 +1,34 @@
+Instructions to build the executable of Isaac Debug Helper for Windows.
+
+Prerequisites
+You need Python 3.x with cx_Freeze, psutil, pywin32.
+
+Instructions
+1) Put Icon.ico in Isaac Debug Helper folder.
+2) Add icon code to main.py
+Change 
+
+if __name__ == "__main__":
+	root = tk.Tk()
+	root.title("Isaac Debug Helper")
+	root.geometry(GEOMETRY)
+	gui = GUI(root)
+	gui.pack()
+	gui.mainloop()
+	
+Into
+
+if __name__ == "__main__":
+	root = tk.Tk()
+	root.title("Isaac Debug Helper")
+	root.wm_iconbitmap("Icon.ico")
+	root.geometry(GEOMETRY)
+	gui = GUI(root)
+	gui.pack()
+	gui.mainloop()
+
+3) Run build.bat or in the command line
+	Python setupWin32.py build
+	
+4) Check build folder.
+	

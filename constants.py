@@ -1,6 +1,7 @@
 import configparser
 
 OPTIONSOPEN = False
+VERSION = "2.1.0" #Used to check for updates
 try: 
 	config = configparser.ConfigParser()
 	config.read("config.cfg")

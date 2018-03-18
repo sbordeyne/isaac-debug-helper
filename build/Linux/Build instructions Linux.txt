@@ -1,0 +1,38 @@
++Instructions to build the executable of Isaac Debug Helper for Linux.
+
+Prerequisites
+You need Python 3.x with cx_Freeze, tkinter (tcl/Tk) and psutil.
+
+Instructions
+1) Put Icon.png in Isaac Debug Helper folder.
+2) Add icon code to main.py
+On top add
+
+from tkinter import PhotoImage
+
+Change
+
+if __name__ == "__main__":
+	root = tk.Tk()
+	root.title("Isaac Debug Helper")
+	root.geometry(GEOMETRY)
+	gui = GUI(root)
+	gui.pack()
+	gui.mainloop()
+	
+into
+
+if __name__ == "__main__":
+	root = tk.Tk()
+	root.title("Isaac Debug Helper")
+	icon = PhotoImage(file="/home/teamdodo/Documenti/Team Dodo/2_1_0_build/Icon.png")
+	root.wm_iconphoto(root._w, icon)
+	root.geometry(GEOMETRY)
+	gui = GUI(root)
+	gui.pack()
+	gui.mainloop()
+
+3) Run build.sh or from the command line
+	python3 setupLinux.py build
+	
+4) Check build folder.
